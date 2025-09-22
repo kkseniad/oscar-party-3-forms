@@ -13,6 +13,6 @@
 #  updated_at   :datetime         not null
 #
 class Director < ApplicationRecord
-  validate(:first_name, presence: true)
-  validate(:last_name, presence: true)
+  validates(:first_name, presence: true)
+  validates(:last_name, presence: true)
 end

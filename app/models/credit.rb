@@ -10,7 +10,7 @@
 #  movie_id   :integer
 #
 class Credit < ApplicationRecord
-  validate(:role, presence: true)
-  validate(:actor_id, presence: true)
-  validate(:movie_id, presence: true)
+  validates(:role, presence: true)
+  validates(:actor_id, presence: true)
+  validates(:movie_id, presence: true)
 end
