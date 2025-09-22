@@ -12,4 +12,6 @@
 #  updated_at :datetime         not null
 #
 class Actor < ApplicationRecord
+  validete(:first_name, presence: true)
+  validate(:last_name, presence: true)
 end

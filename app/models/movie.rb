@@ -16,4 +16,7 @@
 #  director_id  :integer
 #
 class Movie < ApplicationRecord
+  validate(:title, presence: true, uniqueness: true)
+  validate(:year, presence: true)
+  validate(:director_id, presence: true)
 end
