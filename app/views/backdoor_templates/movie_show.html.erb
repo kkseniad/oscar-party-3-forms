@@ -20,67 +20,62 @@
   <a href="/movies/<%= @the_movie.id %>" target="_blank">View Movie Details</a>
 </p>
 
-<form action="/backdoor/modify_movie" method="post">
-    <div>
-      <label for="movie_title_box">Title</label>
-      <input type="text" id="movie_title_box" name="query_title" value="<%= @the_movie.title %>">
-    </div>
+<form action="/backdoor/modify_movie/<%= @the_movie.id %>" method="post">
+  <div>
+    <label for="movie_title_box">Title</label>
+    <input type="text" id="movie_title_box" name="query_title" value="<%= @the_movie.title %>">
+  </div>
 
-    <div>
-      <label for="movie_year_box">Year</label>
-      <input type="number" id="movie_year_box" name="query_year" value="<%= @the_movie.year %>" >
-    </div>
+  <div>
+    <label for="movie_year_box">Year</label>
+    <input type="number" id="movie_year_box" name="query_year" value="<%= @the_movie.year %>">
+  </div>
 
-    <div>
-      <label for="movie_duration_box">Duration</label>
-      <input type="number" id="movie_duration_box" name="query_duration" value="<%= @the_movie.duration %>" >
-    </div>
+  <div>
+    <label for="movie_duration_box">Duration</label>
+    <input type="number" id="movie_duration_box" name="query_duration" value="<%= @the_movie.duration %>">
+  </div>
 
-    <div>
-      <label for="movie_description_box">Description</label>
-      <textarea id="movie_description_box" name="query_description" rows="3" ><%= @the_movie.description %></textarea>
-    </div>
+  <div>
+    <label for="movie_description_box">Description</label>
+    <textarea id="movie_description_box" name="query_description" rows="3"><%= @the_movie.description %></textarea>
+  </div>
 
-    <div>
-      <label for="movie_image_box">Image URL</label>
-      <input type="text" id="movie_image_box" name="query_image" value="<%= @the_movie.image %>" >
-    </div>
+  <div>
+    <label for="movie_image_box">Image URL</label>
+    <input type="text" id="movie_image_box" name="query_image" value="<%= @the_movie.image %>">
+  </div>
 
-    <div>
-      <label for="movie_director_box">Director</label>
-      <select id="movie_director_box" name="query_director_id">
-        <% the_dir = Director.where({ :id => @the_movie.director_id }).at(0) %>
-        <option value="<@>"><%= the_dir.first_name %> <%= the_dir.last_name %></option>
-        <% Director.all.order({ :last_name => :asc }).each do |a_director| %>
-          <option value="<%= a_director.id %>">
-            <%= a_director.first_name %> <%= a_director.last_name %>
-          </option>
-        <% end %>
-      </select>
-    </div>
+  <div>
+    <label for="movie_director_box">Director</label>
+    <select id="movie_director_box" name="query_director_id">
+      <% Director.all.order(last_name: :asc).each do |a_director| %>
+        <option value="<%= a_director.id %>" <%= "selected" if a_director.id == @the_movie.director_id %>>
+          <%= a_director.first_name %> <%= a_director.last_name %>
+        </option>
+      <% end %>
+    </select>
+  </div>
 
-    <div>
-      <label for="movie_released_on_box">Released On</label>
-      <input type="date" id="movie_released_on_box" name="query_released_on" value="<%= @the_movie.released_on %>">
-    </div>
+  <div>
+    <label for="movie_released_on_box">Released On</label>
+    <input type="date" id="movie_released_on_box" name="query_released_on" value="<%= @the_movie.released_on %>">
+  </div>
 
-    <div>
-      <label for="movie_oscar_cohort_box">Oscar Cohort</label>
-      <input type="number" id="movie_oscar_cohort_box" name="query_oscar_cohort" value="<%= @the_movie.oscar_cohort %>" >
-    </div>
+  <div>
+    <label for="movie_oscar_cohort_box">Oscar Cohort</label>
+    <input type="number" id="movie_oscar_cohort_box" name="query_oscar_cohort" value="<%= @the_movie.oscar_cohort %>">
+  </div>
 
-    <fieldset>
-      <legend>Result</legend>
+  <fieldset>
+    <legend>Result</legend>
 
-      <input type="radio" id="movie_result_nominated_box" name="query_result" value="nominated" >
-      <label for="movie_result_nominated_box">Nominated</label>
+    <input type="radio" id="movie_result_won_box" name="query_result" value="won" <%= "checked" if @the_movie.result == "won" %>>
+    <label for="movie_result_won_box">Won</label>
 
-      <input type="radio" id="movie_result_won_box" name="query_result" value="won" <%= "checked" if @the_movie.result == "won" %> >
-      <label for="movie_result_won_box">Won</label>
-      
-      <input type="radio" id="movie_result_did_not_win_box" name="query_result" value="did not win" <%= "checked" if @the_movie.result == "did not win" %> >
-      <label for="movie_result_did_not_win_box">Did not win</label>
-    </fieldset>
+    <input type="radio" id="movie_result_did_not_win_box" name="query_result" value="did not win" <%= "checked" if @the_movie.result != "won" %>>
+    <label for="movie_result_did_not_win_box">Nominated</label>
+  </fieldset>
 
-    <button type="submit">Update Movie</button>
+  <button type="submit">Update Movie</button>
 </form>

@@ -167,7 +167,7 @@ class BackdoorController < ApplicationController
 
     if the_movie.valid?
       the_movie.save
-      redirect_to("/backdoor/movies/#{the_movie.id}", { :notice => "Movie created successfully." })
+      redirect_to("/backdoor/movies/#{the_movie.id}", { :notice => "Movie updated successfully." })
     else
       redirect_to("/backdoor/movies/#{the_movie.id}", { :alert => the_movie.errors.full_messages.to_sentence })
     end
