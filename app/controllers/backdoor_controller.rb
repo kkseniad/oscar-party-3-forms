@@ -6,6 +6,12 @@ class BackdoorController < ApplicationController
     render({ :template => "backdoor_templates/backdoor_index" })
   end
 
+  def directors_index
+    @list_of_directors = Director.all
+
+    render({ :template => "backdoor_templates/directors_index" })
+  end
+
   def create_director
     the_director = Director.new
     the_director.first_name = params.fetch("query_first_name")
