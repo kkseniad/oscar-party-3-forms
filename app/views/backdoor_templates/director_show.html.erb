@@ -1,18 +1,18 @@
 <h1>Edit Director #<%= @the_director.id %></h1>
 
 <p>
-  <a href="/directors/<%= @the_director.id %> target="_blank" >View Director Details</a>
+  <a href="/directors/<%= @the_director.id %>" target="_blank">View Director Details</a>
 </p>
 
 <form action="/backdoor/modify_director/<%= @the_director.id %>" method="post">
   <div>
     <label for="director_first_name_box">Director First Name</label>
-    <input type="text" id="director_first_box" name="query_first_name" value="<%= @the_director.first_name %>">
+    <input type="text" id="director_first_name_box" name="query_first_name" value="<%= @the_director.first_name %>">
   </div>
 
   <div>
-    <label for="director_last_name">Director Last Name</label>
-    <input type="text" id="director_last_name" name="query_last_name" value="<%= @the_director.last_name %>">
+    <label for="director_last_name_box">Director Last Name</label>
+    <input type="text" id="director_last_name_box" name="query_last_name" value="<%= @the_director.last_name %>">
   </div>
 
   <div>
