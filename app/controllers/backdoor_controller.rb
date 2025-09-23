@@ -12,6 +12,13 @@ class BackdoorController < ApplicationController
     render({ :template => "backdoor_templates/directors_index" })
   end
 
+  def director_show
+    the_id = params.fetch("path_id")
+    @the_director = Director.where({ :id => the_id}).at(0)
+
+    render({ :template => "backdoor_templates/director_show"})
+  end
+
   def create_director
     the_director = Director.new
     the_director.first_name = params.fetch("query_first_name")
