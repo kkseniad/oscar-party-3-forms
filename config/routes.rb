@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   get("/backdoor/delete_director/:path_id", { :controller => "backdoor", :action => "destroy_director" })
 
   get("/backdoor/actors", { :controller => "backdoor", :action => "actors_index"})
+  post("/backdoor/insert_actor", { :controller => "backdoor", :action => "create_actor" })
 end

@@ -62,4 +62,20 @@ class BackdoorController < ApplicationController
     redirect_to("/backdoor/directors", { :notice => "Director deleted successfully." })
   end
 
+  def create_actor
+    the_actor = Actor.new
+    the_actor.first_name = params.fetch("query_first_name")
+    the_actor.last_name = params.fetch("query_last_name")
+    the_actor.dob = params.fetch("query_dob")
+    the_actor.bio = params.fetch("query_bio")
+    the_actor.image = params.fetch("query_image")
+    
+    if the_actor.valid?
+      the_actor.save
+      redirect_to("/backdoor", { :notice => "Actor created successfully." })
+    else
+      redirect_to("/backdoor", { :alert => the_actor.errors.full_messages.to_sentence })
+    end
+  end
+
 end
