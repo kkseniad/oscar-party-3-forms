@@ -62,6 +62,19 @@ class BackdoorController < ApplicationController
     redirect_to("/backdoor/directors", { :notice => "Director deleted successfully." })
   end
 
+  def actors_index
+    @list_of_actors = Actor.all
+
+    render({ :template => "backdoor_templates/actors_index" })
+  end
+
+  def actor_show
+    the_id = params.fetch("path_id")
+    @the_actor = Actor.where({ :id => the_id}).at(0)
+
+    render({ :template => "backdoor_templates/actor_show"})
+  end
+
   def create_actor
     the_actor = Actor.new
     the_actor.first_name = params.fetch("query_first_name")
@@ -77,5 +90,54 @@ class BackdoorController < ApplicationController
       redirect_to("/backdoor", { :alert => the_actor.errors.full_messages.to_sentence })
     end
   end
+
+  def update_actor
+    the_id = params.fetch("path_id")
+    the_actor = Actor.where({ :id => the_id }).at(0)
+
+    the_actor.first_name = params.fetch("query_first_name")
+    the_actor.last_name = params.fetch("query_last_name")
+    the_actor.dob = params.fetch("query_dob")
+    the_actor.bio = params.fetch("query_bio")
+    the_actor.image = params.fetch("query_image")
+
+    if the_actor.valid?
+      the_actor.save
+      redirect_to("/backdoor/actors/#{the_actor.id}", :notice => "Actor updated successfully.")
+    else
+      redirect_to("/backdoor/actors/#{the_actor.id}", { :alert => the_actor.errors.full_messages.to_sentence })
+    end
+  end
+
+  def destroy_actor
+    the_id = params.fetch("path_id")
+    the_actor = Actor.where({ :id => the_id }).at(0)
+
+    the_actor.destroy
+
+    redirect_to("/backdoor/actors", { :notice => "Actor deleted successfully." })
+  end
+
+  def create_movie
+    the_movie = Movie.new
+    the_movie.title = params.fetch("query_title")
+    the_movie.year = params.fetch("query_year")
+    the_movie.duration = params.fetch("query_duration")
+    the_movie.description = params.fetch("query_description")
+    the_movie.image = params.fetch("query_image")
+    the_movie.director_id = params.fetch("query_director_id")
+    the_movie.released_on = params.fetch("query_released_on")
+    the_movie.oscar_cohort = params.fetch("query_oscar_cohort")
+    the_movie.result = params.fetch("query_result")
+
+    if the_movie.valid?
+      the_movie.save
+      redirect_to("/backdoor", { :notice => "Movie created successfully." })
+    else
+      redirect_to("/backdoor", { :alert => the_movie.errors.full_messages.to_sentence })
+    end
+  end
+
+  
 
 end

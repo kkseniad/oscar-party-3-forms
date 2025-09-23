@@ -80,3 +80,72 @@
     <button type="submit">Create Actor</button>
   </form>
 </article>
+
+<article>
+  <header>
+    <h2>Create Movie</h2>
+  </header>
+  <form action="/backdoor/insert_movie" method="post">
+    <div>
+      <label for="movie_title_box">Title</label>
+      <input type="text" id="movie_title_box" name="query_title">
+    </div>
+
+    <div>
+      <label for="movie_year_box">Year</label>
+      <input type="number" id="movie_year_box" name="query_year">
+    </div>
+
+    <div>
+      <label for="movie_duration_box">Duration</label>
+      <input type="number" id="movie_duration_box" name="query_duration">
+    </div>
+
+    <div>
+      <label for="movie_description_box">Description</label>
+      <textarea id="movie_description_box" name="query_description" rows="3"></textarea>
+    </div>
+
+    <div>
+      <label for="movie_image_box">Image URL</label>
+      <input type="text" id="movie_image_box" name="query_image">
+    </div>
+
+    <div>
+      <label for="movie_director_box">Director</label>
+      <select id="movie_director_box" name="query_director_id">
+        <option value="">Select a director...</option>
+        <% Director.all.order({ :last_name => :asc }).each do |a_director| %>
+          <option value="<%= a_director.id %>">
+            <%= a_director.first_name %> <%= a_director.last_name %>
+          </option>
+        <% end %>
+      </select>
+    </div>
+
+    <div>
+      <label for="movie_released_on_box">Released On</label>
+      <input type="date" id="movie_released_on_box" name="query_released_on">
+    </div>
+
+    <div>
+      <label for="movie_oscar_cohort_box">Oscar Cohort</label>
+      <input type="number" id="movie_oscar_cohort_box" name="query_oscar_cohort">
+    </div>
+
+    <fieldset>
+      <legend>Result</legend>
+
+      <input type="radio" id="movie_result_nominated_box" name="query_result" value="nominated" checked>
+      <label for="movie_result_nominated_box">Nominated</label>
+
+      <input type="radio" id="movie_result_won_box" name="query_result" value="won">
+      <label for="movie_result_won_box">Won</label>
+      
+      <input type="radio" id="movie_result_did_not_win_box" name="query_result" value="did not win">
+      <label for="movie_result_did_not_win_box">Did not win</label>
+    </fieldset>
+
+    <button type="submit">Create Movie</button>
+  </form>
+</article>
