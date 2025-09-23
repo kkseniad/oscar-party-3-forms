@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   get("/backdoor", { :controller => "backdoor", :action => "backdoor_index" })
   
   get("/backdoor/directors", { :controller => "backdoor", :action => "directors_index" })
-  post("/backdoor/insert_director", { :controller => "backdoor", :action => "create_director"})
+  post("/backdoor/insert_director", { :controller => "backdoor", :action => "create_director" })
+  get("/backdoor/delete_director/:path_id", { :controller => "backdoor", :action => "destroy_director" })
 end
