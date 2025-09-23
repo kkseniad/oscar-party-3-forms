@@ -31,7 +31,7 @@ class BackdoorController < ApplicationController
   def destroy_director
     the_id = params.fetch("path_id")
     the_director = Director.where({ :id => the_id }).at(0)
-    
+
     the_director.destroy
 
     redirect_to("/backdoor/directors", { :notice => "Director deleted successfully." })
